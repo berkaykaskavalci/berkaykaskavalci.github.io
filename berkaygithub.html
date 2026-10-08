@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Personal website of Berkay Kaşkavalcı, Mechanical Engineering student at Yaşar University.">
+<title>Berkay Kaşkavalcı</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  /* Layout: one column, drawing-sheet feel. Sticky section strip, content in ruled blocks, contact as a title block. */
+  :root {
+    --bg: #f2f3f0;
+    --surface: #ffffff;
+    --ink: #15181b;
+    --muted: #5b6268;
+    --rule: #cfd3d0;
+    --accent: #b8420e;
+    --accent-ink: #ffffff;
+    --f-display: "Barlow Semi Condensed", "Arial Narrow", Arial, sans-serif;
+    --f-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    --f-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #111416; --surface: #181c1f; --ink: #e7eae8; --muted: #9aa2a7;
+      --rule: #2c3236; --accent: #f08a4b; --accent-ink: #14110f;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #111416; --surface: #181c1f; --ink: #e7eae8; --muted: #9aa2a7;
+    --rule: #2c3236; --accent: #f08a4b; --accent-ink: #14110f;
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 64px; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--f-body);
+    font-size: 16px;
+    line-height: 1.6;
+    padding-inline: 16px;
+    padding-block: 0 40px;
+  }
+  .wrap { max-width: 720px; margin-inline: auto; }
+  a { color: var(--accent); }
+  h1, h2, h3 { font-family: var(--f-display); text-wrap: balance; margin: 0; line-height: 1.12; }
+  p { margin: 0 0 12px; }
+  ul { margin: 0; padding-left: 20px; }
+  li { margin-bottom: 6px; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  /* Section strip */
+  .strip {
+    position: sticky;
+    top: env(safe-area-inset-top, 0px);
+    z-index: 5;
+    margin-inline: -16px;
+    padding-inline: 16px;
+    background: var(--bg);
+    border-bottom: 1px solid var(--rule);
+  }
+  .strip-inner {
+    max-width: 720px; margin-inline: auto;
+    display: flex; gap: 22px; overflow-x: auto;
+    padding-block: 12px;
+    scrollbar-width: none;
+  }
+  .strip-inner::-webkit-scrollbar { display: none; }
+  .strip a {
+    font-family: var(--f-mono); font-size: 12.5px; letter-spacing: 0.06em;
+    text-transform: uppercase; text-decoration: none; color: var(--muted);
+    white-space: nowrap;
+  }
+  .strip a:hover, .strip a.on { color: var(--accent); }
+
+  /* Hero */
+  .hero { padding-block: 40px 28px; }
+  .tag {
+    font-family: var(--f-mono); font-size: 12.5px; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 10px;
+  }
+  h1 { font-size: clamp(2.6rem, 12vw, 4.2rem); font-weight: 700; letter-spacing: -0.01em; }
+  .lead { color: var(--muted); font-size: 1.1rem; margin-top: 14px; max-width: 34em; }
+
+  /* Sections */
+  section { padding-block: 30px 6px; border-top: 1px solid var(--rule); }
+  .hero + section { border-top: 1px solid var(--rule); }
+  .label {
+    font-family: var(--f-mono); font-size: 12px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--muted); margin-bottom: 6px;
+  }
+  h2 { font-size: 1.9rem; font-weight: 700; margin-bottom: 16px; }
+  h3 { font-size: 1.25rem; font-weight: 600; }
+
+  .facts {
+    display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0; margin-top: 18px;
+    border: 1px solid var(--rule); background: var(--surface);
+  }
+  .fact { padding: 14px 14px 12px; border-right: 1px solid var(--rule); border-bottom: 1px solid var(--rule); min-width: 0; }
+  .fact:nth-child(2n) { border-right: 0; }
+  .fact:nth-last-child(-n+2) { border-bottom: 0; }
+  .fact b { display: block; font-family: var(--f-display); font-size: 1.7rem; line-height: 1.1; font-variant-numeric: tabular-nums; }
+  .fact span { color: var(--muted); font-size: 0.86rem; line-height: 1.35; display: block; margin-top: 4px; }
+
+  .entry { padding-block: 4px 18px; }
+  .entry + .entry { border-top: 1px dashed var(--rule); padding-top: 18px; }
+  .when { font-family: var(--f-mono); font-size: 12.5px; color: var(--muted); margin: 4px 0 8px; }
+  .where { color: var(--muted); margin-bottom: 8px; }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip {
+    border: 1px solid var(--rule); background: var(--surface);
+    padding: 5px 11px; font-size: 0.92rem;
+  }
+  .group { margin-bottom: 20px; }
+  .group .label { margin-bottom: 10px; }
+
+  .courses { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 8px; }
+  .courses div { border: 1px solid var(--rule); background: var(--surface); padding: 10px 12px; font-size: 0.95rem; }
+
+  /* Title block contact */
+  .block {
+    border: 1.5px solid var(--ink); background: var(--surface);
+    display: grid; grid-template-columns: minmax(0, 1fr);
+    margin-bottom: 18px;
+  }
+  .row {
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    padding: 12px 14px; border-bottom: 1px solid var(--rule); min-width: 0;
+  }
+  .row:last-child { border-bottom: 0; }
+  .row .k { font-family: var(--f-mono); font-size: 11.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+  .row .v { font-size: 1.02rem; overflow-wrap: anywhere; user-select: all; }
+  .row .col { min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+  button.copy {
+    font-family: var(--f-mono); font-size: 12px; letter-spacing: 0.05em; text-transform: uppercase;
+    background: var(--accent); color: var(--accent-ink); border: 0; padding: 9px 13px; cursor: pointer; flex: none;
+  }
+  button.copy:active { opacity: 0.85; }
+  .links a { margin-right: 16px; font-size: 0.98rem; }
+
+  footer { padding-block: 26px 0; color: var(--muted); font-family: var(--f-mono); font-size: 12px; letter-spacing: 0.04em; }
+
+  @media (min-width: 560px) {
+    .facts { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .fact:nth-child(2n) { border-right: 1px solid var(--rule); }
+    .fact:nth-child(4n) { border-right: 0; }
+    .fact:nth-last-child(-n+2) { border-bottom: 0; }
+    .fact { border-bottom: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+</style>
+
+</head>
+<body>
+<div class="strip"><nav class="strip-inner" aria-label="Sections">
+  <a href="#top" class="on">Home</a>
+  <a href="#education">Education</a>
+  <a href="#experience">Experience</a>
+  <a href="#skills">Skills</a>
+  <a href="#contact">Contact</a>
+</nav></div>
+
+<div class="wrap" id="top">
+
+  <header class="hero">
+    <div class="tag">Mechanical Engineering Student</div>
+    <h1>Berkay Kaşkavalcı</h1>
+    <p class="lead">Designing, analysing and problem solving at Yaşar University, Izmir, Türkiye.</p>
+  </header>
+
+  <section id="about">
+    <div class="label">About</div>
+    <p>Mechanical Engineering student at Yaşar University with hands-on experience in AutoCAD, Fusion 360 and MATLAB, and a solid foundation in mechanical design, manufacturing processes, thermodynamics, heat transfer, materials science and energy efficiency. I completed an internship at ZF Lemförder and have two years of client-facing experience as a Luxury Watch Specialist.</p>
+    <div class="facts">
+      <div class="fact"><b>2022</b><span>Started B.Sc. at Yaşar University</span></div>
+      <div class="fact"><b>$500K+</b><span>Total sales as Luxury Watch Specialist</span></div>
+      <div class="fact"><b>2 years</b><span>Client-facing experience</span></div>
+      <div class="fact"><b>ZF</b><span>Internship in Izmir, August 2025</span></div>
+    </div>
+  </section>
+
+  <section id="education">
+    <div class="label">Education</div>
+    <h2>Education</h2>
+    <div class="entry">
+      <h3>Yaşar University</h3>
+      <div class="when">SEP 2022 – PRESENT</div>
+      <div class="where">B.Sc. Mechanical Engineering, Izmir, Türkiye</div>
+      <ul>
+        <li>Applied AutoCAD, Fusion 360, MATLAB and Microsoft Office in coursework and engineering projects.</li>
+        <li>Studied mechanical design, manufacturing processes and energy efficiency in depth.</li>
+      </ul>
+    </div>
+    <div class="group">
+      <div class="label">Relevant coursework</div>
+      <div class="courses">
+        <div>Machine Design</div>
+        <div>Manufacturing Processes</div>
+        <div>Thermodynamics</div>
+        <div>Heat Transfer</div>
+        <div>Materials Science</div>
+        <div>Energy Efficiency</div>
+      </div>
+    </div>
+    <div class="entry">
+      <h3>Bilfen Science High School</h3>
+      <div class="when">SEP 2018 – JUN 2022</div>
+      <div class="where">High School Diploma</div>
+      <ul><li>Graduated with a grade average of 90.</li></ul>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="label">Experience</div>
+    <h2>Experience</h2>
+    <div class="entry">
+      <h3>Mechanical Engineering Intern, ZF Lemförder</h3>
+      <div class="when">AUG 2025 · 1 MONTH</div>
+      <div class="where">Izmir, Türkiye</div>
+      <ul><li>Completed a one-month internship at an automotive supplier, gaining exposure to an industrial manufacturing environment.</li></ul>
+    </div>
+    <div class="entry">
+      <h3>Luxury Watch Specialist</h3>
+      <div class="when">2024 – PRESENT</div>
+      <ul>
+        <li>Generated $500K+ in total sales.</li>
+        <li>Source requested watches for clients within one week.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="label">Skills</div>
+    <h2>Skills</h2>
+    <div class="group">
+      <div class="label">CAD and design</div>
+      <div class="chips"><span class="chip">AutoCAD</span><span class="chip">Fusion 360</span><span class="chip">Technical Drawing</span><span class="chip">Mechanical Design</span><span class="chip">Machine Design</span></div>
+    </div>
+    <div class="group">
+      <div class="label">Analysis and programming</div>
+      <div class="chips"><span class="chip">MATLAB</span><span class="chip">Python</span></div>
+    </div>
+    <div class="group">
+      <div class="label">Engineering topics</div>
+      <div class="chips"><span class="chip">Manufacturing Processes</span><span class="chip">Thermodynamics</span><span class="chip">Heat Transfer</span><span class="chip">Materials Science</span><span class="chip">Energy Efficiency</span></div>
+    </div>
+    <div class="group">
+      <div class="label">Project management and office</div>
+      <div class="chips"><span class="chip">Microsoft Project</span><span class="chip">Project Management</span><span class="chip">Microsoft Office</span></div>
+    </div>
+    <div class="group">
+      <div class="label">Soft skills</div>
+      <div class="chips"><span class="chip">Problem Solving</span><span class="chip">Teamwork</span><span class="chip">Communication</span><span class="chip">Attention to Detail</span></div>
+    </div>
+    <div class="group">
+      <div class="label">Languages</div>
+      <div class="chips"><span class="chip">Turkish · native</span><span class="chip">English · fluent</span><span class="chip">German · A1</span></div>
+    </div>
+    <div class="group">
+      <div class="label">Certifications</div>
+      <ul>
+        <li>Amateur Sailor Certificate</li>
+        <li>Short Range Radio Operator Certificate</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="label">Contact</div>
+    <h2>Contact</h2>
+    <p>Open to internships and entry-level mechanical engineering opportunities.</p>
+    <div class="block">
+      <div class="row">
+        <div class="col"><span class="k">Phone</span><span class="v" id="phone">+90 530 366 39 26</span></div>
+        <button class="copy" type="button" data-target="phone">Copy</button>
+      </div>
+      <div class="row">
+        <div class="col"><span class="k">Email</span><span class="v" id="email">berkaykaskavalci@gmail.com</span></div>
+        <button class="copy" type="button" data-target="email">Copy</button>
+      </div>
+      <div class="row">
+        <div class="col"><span class="k">Location</span><span class="v">Izmir, Türkiye</span></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>© 2026 BERKAY KAŞKAVALCI</footer>
+</div>
+
+<script>
+  // Copy buttons with a selection fallback.
+  document.querySelectorAll("button.copy").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var el = document.getElementById(btn.dataset.target);
+      var text = el.textContent.trim();
+      function done() { btn.textContent = "Copied"; setTimeout(function () { btn.textContent = "Copy"; }, 1500); }
+      function fallback() {
+        var r = document.createRange(); r.selectNodeContents(el);
+        var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+        btn.textContent = "Selected"; setTimeout(function () { btn.textContent = "Copy"; }, 1500);
+      }
+      try { navigator.clipboard.writeText(text).then(done, fallback); } catch (e) { fallback(); }
+    });
+  });
+
+  // Highlight the current section in the strip.
+  var links = Array.prototype.slice.call(document.querySelectorAll(".strip a"));
+  var ids = ["top", "education", "experience", "skills", "contact"];
+  function mark() {
+    var y = window.scrollY + 120, cur = "top";
+    ids.forEach(function (id) { var e = document.getElementById(id); if (e && e.offsetTop <= y) cur = id; });
+    if (window.innerHeight + window.scrollY >= document.body.scrollHeight - 4) cur = "contact";
+    links.forEach(function (a) { a.classList.toggle("on", a.getAttribute("href") === "#" + cur); });
+  }
+  window.addEventListener("scroll", mark, { passive: true }); mark();
+</script>
+</body>
+</html>
